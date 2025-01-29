@@ -208,13 +208,18 @@ class FieldsField extends PluginFormcreatorAbstractField
          $field['value'] = $value;
       } else {
          //get default value
-         if ($this->getField()->fields['default_value'] !== "") {
+         if (
+            $this->getField()->fields['default_value'] !== ""
+            && $this->getField()->fields['default_value'] !== null
+         ) {
             $value = $this->getField()->fields['default_value'];
             // shortcut for date/datetime
             if (in_array($this->getField()->fields['type'], ['date', 'datetime'])
                   && $value == 'now') {
                $value = $_SESSION["glpi_currenttime"];
             }
+         } else {
+            $value = '';
          }
          $field['value'] = $value;
       }
