@@ -211,6 +211,7 @@ class FieldsField extends PluginFormcreatorAbstractField
          if (
             $this->getField()->fields['default_value'] !== ""
             && $this->getField()->fields['default_value'] !== null
+            && $this->getField()->fields['default_value'] !== 0
          ) {
             $value = $this->getField()->fields['default_value'];
             // shortcut for date/datetime
@@ -511,7 +512,7 @@ class FieldsField extends PluginFormcreatorAbstractField
    private function isAdditionalFieldEmpty(): bool {
       switch ($this->getField()->fields['type']) {
          case 'dropdown':
-            return $this->getField()->fields['mandatory'] && $this->value == 0;
+            return $this->getField()->fields['mandatory'] && ($this->value == 0 || $this->value == '' || $this->value == null);
       }
 
       return $this->getField()->fields['mandatory'] && $this->value == '';
